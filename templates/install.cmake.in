@@ -13,6 +13,9 @@
 
 # Install the EAAPI user algorithm.
 file(COPY "@CMAKE_CURRENT_BINARY_DIR@/Release/@SERVANT@.exe" DESTINATION "@CMAKE_INSTALL_PREFIX@")
+foreach (BIN @EAAPI_BINARIES@)
+    file(COPY ${BIN} DESTINATION "@CMAKE_INSTALL_PREFIX@")
+endforeach(BIN)
 
 # Generate the configuration information for the servant.
 execute_process(COMMAND "@CMAKE_INSTALL_PREFIX@/@SERVANT@Servant.exe generate-configuration-info"
