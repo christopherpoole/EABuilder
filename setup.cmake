@@ -25,6 +25,9 @@ if (EXISTS ${CMAKE_INSTALL_PREFIX})
     endif()
 endif()
 
+# Append 'Servant' to the algorith name
+set(SERVANT "${SERVANT}Servant")
+
 # Setup the project.
 project(${SERVANT})
 
