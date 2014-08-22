@@ -31,6 +31,6 @@ project(${SERVANT})
 # Find the Eclipse Algorithm API includes and libraries.
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/EABuilder/modules")
 
-#find_package(EAAPI REQUIRED)
-#include_directories(${EAAPI_INCLUDE_DIRS})
+find_package(EAAPI REQUIRED)
+include_directories(${EAAPI_INCLUDE_DIRS})
 
