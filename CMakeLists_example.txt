@@ -1,0 +1,30 @@
+# CMake build tools for custom algorithms in Varian Eclipse.
+#
+# Author:    Christopher M Poole <mail@christopherpoole.net>
+# Institute: Dept. Ob. Gyn., University of Melbourne, Australia
+# Date:      21 August 2014
+#
+# --- Compilation, Installation, and Uninstallation ---
+
+cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/EABuilder")
+
+# Setup the build environment.
+include(EABuilder/setup.cmake)
+
+# Search for external libraries and dependencies here.
+
+# Add the user code to the build.
+include_directories(include)
+file(GLOB sources ${PROJECT_SOURCE_DIR}/src/*.cc)
+file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
+
+add_executable(${SERVANT} main.cc ${sources} ${headers})
+target_link_libraries(${SERVANT} ${EAAPI_LIBRARIES})
+
+# Add extra libraries to link against here.
+
+# Installation/uninstallation the algorithm, configuration, 
+# and injection into the Distributed Calculation Framework (DCF).
+include(EABuilder/deploy.cmake)
+

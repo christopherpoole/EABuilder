@@ -1,0 +1,43 @@
+# CMake build tools for custom algorithms in Varian Eclipse.
+#
+# Author:    Christopher M Poole <mail@christopherpoole.net>
+# Institute: Dept. Ob. Gyn., University of Melbourne, Australia
+# Date:      21 August 2014
+#
+# --- Custom Algorithm Post-installation Configuration ---
+#
+# This is an automation of the information provided in the Eclipse
+# Algorithm API Reference Guide (B503485R01C, December 2011).
+#
+#   Chapter 4 -> Installing a Custom Algorithm (page 44-45)
+
+# Install the EAAPI user algorithm.
+file(COPY "@CMAKE_CURRENT_BINARY_DIR@/Release/@SERVANT@.exe" DESTINATION "@CMAKE_INSTALL_PREFIX@")
+
+# Generate the configuration information for the servant.
+execute_process(COMMAND "@CMAKE_INSTALL_PREFIX@/@SERVANT@Servant.exe generate-configuration-info"
+                WORKING_DIRECTORY "@CMAKE_INSTALL_PREFIX@")
+
+# Register the servant.
+execute_process(COMMAND "@DCF_DIRECTORY@/server/bin/VCConfig.exe register-servant VCConfigurationPath='@DCF_DIRECTORY@/server/VCConfiguration.xml' ServantXmlPath='@CMAKE_INSTALL_PREFIX@/ServantInfo.xml'"
+                WORKING_DIRECTORY "@DCF_DIRECTORY@")
+
+# Register the algorithm.
+execute_process(COMMAND "@DCF_DIRECTORY@/server/bin/InstallAlgoritm.exe install '@CMAKE_INSTALL_PREFIX@/AlgorithmInfo.xml' '@DCF_DIRECTORY@/client/InstalledAlgorithms.xml'"
+                WORKING_DIRECTORY "@DCF_DIRECTORY@")
+
+# Copy the calculation options.
+if (@COPY_CALCULATION_OPTIONS@)
+    message("Copying the Calculation Options has not yet been implemented.")
+endif()
+
+# Force DCF agents to reload the configuration.
+if (@FORCE_AGENT_RELOAD@)
+    execute_process(COMMAND "curl -X POST http://localhost:57580")
+endif()
+
+# Copy the physical material table files.
+if (@COPY_MATERIAL_TABLE@)
+    message("Copying the Physical Material Table has not yet been implemented.")
+endif()
+
