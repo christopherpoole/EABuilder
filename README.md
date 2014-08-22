@@ -31,7 +31,7 @@ Using the example `CMakeLists.txt` file (`CMakeLists_example.txt`), you will wan
 
 In `build/` start the build process like this:
 
-    camke .. -G"Visual Studio 10 Win64" <other options>
+    cmake .. -G"Visual Studio 10 Win64" <other options>
     cmake --build . --config Release
 
 This will compile the code only. If you seek to install your algorithm for testing as well:
