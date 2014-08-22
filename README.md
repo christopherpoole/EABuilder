@@ -12,6 +12,9 @@ This will compile your algorithm against the `Debug` EAAPI (you can choose `Rele
 EABuilder has been tested on a workstation with Varian Eclipse 11.0.31 only. There is no guarantee it will work on your system with the same or other versions.
 
 ## Dependences
+ - [CMake 2.8](http://www.cmake.org/cmake/resources/software.html) or above.
+ - [Cygwin 1.7](https://www.cygwin.com/) or above if you want to make Windows development  easier.
+ - [curl 7.37] or above installed via Cygwin if you want to reload agent during installation.
 
 ## Usage and Work-flow
 Using the example `CMakeLists.txt` file (`CMakeLists_example.txt`), you will want to make your project directory look something like this:
