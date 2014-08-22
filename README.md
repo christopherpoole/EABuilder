@@ -1,4 +1,4 @@
-# CMake build tools for custom algorithms in Varian Eclipse.
+## CMake build tools for custom algorithms in Varian Eclipse.
 If you want to avoid Visual Studio, and you prefer the command line, this is the builder you want for compiling, installing, and setting up custom dose calculation algorithms for Varian Eclipse, using the Eclipse Algorithm EAAPI.
 Ok, so you can't avoid Visual Studio completely; the compiler is still necessary given the syntax used in the EAAPI header files.
 As a preview, EABuilder lets you do things like this:
@@ -14,7 +14,7 @@ EABuilder has been tested on a workstation with Varian Eclipse 11.0.31 only. The
 ## Dependences
  - [CMake 2.8](http://www.cmake.org/cmake/resources/software.html) or above.
  - [Cygwin 1.7](https://www.cygwin.com/) or above if you want to make Windows development  easier.
- - [curl 7.37] or above installed via Cygwin if you want to reload agent during installation.
+ - `curl` installed via Cygwin if you want to reload agents during installation.
 
 ## Usage and Work-flow
 Using the example `CMakeLists.txt` file (`CMakeLists_example.txt`), you will want to make your project directory look something like this:
