@@ -14,6 +14,7 @@
 #   EAAPI_DEFINITIONS - Compiler flags for using the EAAPI.
 
 find_package(PkgConfig)
+set(CMAKE_FIND_LIBRARY_SUFFIXES ".lib" ".dll")
 
 # Find the EAAPI headers.
 find_path(EAAPI_INCLUDE_DIR include HINTS C:/EAAPI)
