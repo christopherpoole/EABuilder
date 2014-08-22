@@ -29,8 +29,7 @@ set(EAAPI_LIBRARIES optimized ${EAAPI_LIBRARY} Rpcrt4.lib
 # Find the EAAPI binaries, both Debug and Release
 find_library(EAAPI_BINARY NAMES VCServant.dll HINTS C:/EAAPI/bin/x64_Release)
 find_library(EAAPI_DEBUG_BINARY NAMES VCServantd.dll HINTS C:/EAAPI/bin/x64_Debug)
-set(EAAPI_BINARIES optimized ${EAAPI_BINARY}
-                   debug     ${EAAPI_DEBUG_BINARY})
+set(EAAPI_BINARIES ${EAAPI_BINARY} ${EAAPI_DEBUG_BINARY})
 
 
 # Set compiler flags for both Debug and Release target
