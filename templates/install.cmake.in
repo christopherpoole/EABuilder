@@ -22,12 +22,16 @@ execute_process(COMMAND "@CMAKE_INSTALL_PREFIX@/@SERVANT@.exe" "generate-configu
                 WORKING_DIRECTORY "@CMAKE_INSTALL_PREFIX@")
 
 # Register the servant.
-execute_process(COMMAND "@DCF_DIRECTORY@/server/bin/VCConfig.exe" "register-servant VCConfigurationPath='@DCF_DIRECTORY@/server/VCConfiguration.xml' ServantXmlPath='@CMAKE_INSTALL_PREFIX@/ServantInfo.xml'"
-                WORKING_DIRECTORY "@DCF_DIRECTORY@")
+if (@REGISTER_SERVANT@)
+    execute_process(COMMAND "@DCF_DIRECTORY@/server/bin/VCConfig.exe" "register-servant VCConfigurationPath='@DCF_DIRECTORY@/server/VCConfiguration.xml' ServantXmlPath='@CMAKE_INSTALL_PREFIX@/ServantInfo.xml'"
+                    WORKING_DIRECTORY "@DCF_DIRECTORY@")
+endif()
 
 # Register the algorithm.
-execute_process(COMMAND "@DCF_DIRECTORY@/server/bin/InstallAlgoritm.exe" "install '@CMAKE_INSTALL_PREFIX@/AlgorithmInfo.xml' '@DCF_DIRECTORY@/client/InstalledAlgorithms.xml'"
-                WORKING_DIRECTORY "@DCF_DIRECTORY@")
+if (@REGISTER_ALGORITHM@)
+        execute_process(COMMAND "@DCF_DIRECTORY@/server/bin/InstallAlgoritm.exe" "install '@CMAKE_INSTALL_PREFIX@/AlgorithmInfo.xml' '@DCF_DIRECTORY@/client/InstalledAlgorithms.xml'"
+                    WORKING_DIRECTORY "@DCF_DIRECTORY@")
+endif()
 
 # Copy the calculation options.
 if (@COPY_CALCULATION_OPTIONS@)

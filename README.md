@@ -49,6 +49,41 @@ Options available with EABuilder are listed below. At a minimum you will probabl
     Default Value: <DCF_DIRECTORY>/server/bin/<SERVANT> (<VERSION>)
     Useage: -DCMAKE_INSTALL_PREFIX=<path>
 
+    Variable Name: SERVANT
+    Description: The name of the algorithm.
+    Default Value: Algorithm
+    Usage: -DSERVANT:STRING=<servant name>
+
+    Variable Name: VERSION
+    Description: The version of the algorithm.
+    Default Value: 0.0.1
+    Usage: -DVERSION:STRING=<servant version>
+
+    Variable Name: DCF_DIRECTORY
+    Description: The path to the Distributed Calculation Framework installation.
+    Default Value: D:/VMSOS/DCF
+    Usage: -DDCF_DRECTORY:PATH=<path>
+
+    Variable Name: OVERWRITE
+    Description: Overwrite any current installation with the same version.
+    Default Value: OFF
+    Usage: -DOVERWRITE=<ON or OFF>
+
+    Variable Name: REGISTER_SERVANT
+    Description: Register the servant during installation.
+    Default Value: ON
+    Usage: -DREGISTER_SERVANT=<ON or OFF>
+
+    Variable Name: REGISTER_ALGORITHM
+    Description: Register the algorithm during installation.
+    Default Value: ON
+    Usage: -DREGISTER_ALGORITHM=<ON or OFF>
+
+    Variable Name: FORCE_AGENT_RELOAD
+    Description: Instruct agents to reload the configuration (requires curl).
+    Default Value: OFF
+    Usage: -DFORCE_AGENT_RELOAD=<ON or OFF>
+
     Variable Name: COPY_CALCULATION_OPTIONS
     Description: Copy the Calculation Options schema and files.
     Default Value: OFF
@@ -60,29 +95,4 @@ Options available with EABuilder are listed below. At a minimum you will probabl
         to populate the ARIA database.
     Default Value: OFF
     USAGE: -DCOPY_MATERIAL_TABLE=<ON or OFF>
-
-    Variable Name: DCF_DIRECTORY
-    Description: The path to the Distributed Calculation Framework installation.
-    Default Value: D:/VMSOS/DCF
-    Usage: -DDCF_DRECTORY:PATH=<path>
-
-    Variable Name: FORCE_AGENT_RELOAD
-    Description: Instruct agents to reload the configuration (requires curl).
-    Default Value: OFF
-    Usage: -DFORCE_AGENT_RELOAD=<ON or OFF>
-
-    Variable Name: OVERWRITE
-    Description: Overwrite any current installation with the same version.
-    Default Value: OFF
-    Usage: -DOVERWRITE=<ON or OFF>
-
-    Variable Name: SERVANT
-    Description: The name of the algorithm.
-    Default Value: Algorithm
-    Usage: -DSERVANT:STRING=<servant name>
-
-    Variable Name: VERSION
-    Description: The version of the algorithm.
-    Default Value: 0.0.1
-    Usage: -DVERSION:STRING=<servant version>
 
