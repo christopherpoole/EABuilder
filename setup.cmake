@@ -17,6 +17,8 @@ option(COPY_MATERIAL_TABLE "Copy the Physical Material Table for this algorithm.
 
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
     set(CMAKE_INSTALL_PREFIX "${DCF_DIRECTORY}/server/bin/${SERVANT} (${VERSION})" CACHE PATH "default install path" FORCE)
+else()
+    set(CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}/${SERVANT} (${VERSION})" CACHE PATH "default install path" FORCE)
 endif()
 
 if (EXISTS ${CMAKE_INSTALL_PREFIX})

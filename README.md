@@ -43,6 +43,12 @@ Any and all dependencies for you project can be specified as indicated in the `C
 ## Options
 Options available with EABuilder are listed below. At a minimum you will probably want to be setting `SERVANT` and `VERSION`. 
 
+    Variable Name: CMAKE_INSTALL_PREFIX
+    Description: The root directory into which the algorithm in installed. If
+        you set this value, "/<SERVANT> (<VERSION>)" is appended automatically.
+    Default Value: <DCF_DIRECTORY>/server/bin/<SERVANT> (<VERSION>)
+    Useage: -DCMAKE_INSTALL_PREFIX=<path>
+
     Variable Name: COPY_CALCULATION_OPTIONS
     Description: Copy the Calculation Options schema and files.
     Default Value: OFF
