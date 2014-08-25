@@ -21,7 +21,12 @@ option(COPY_MATERIAL_TABLE "Copy the Physical Material Table for this algorithm.
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
     set(CMAKE_INSTALL_PREFIX "${DCF_DIRECTORY}/server/bin/${SERVANT} (${VERSION})" CACHE PATH "default install path" FORCE)
 else()
-    set(CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}/${SERVANT} (${VERSION})" CACHE PATH "default install path" FORCE)
+    # Check if "${SERVANT} (${VERSION})" has already been appended to the install prefix.
+    string(FIND ${CMAKE_INSTALL_PREFIX} "${SERVANT} (${VERSION})" HAS_NAME_AND_VERSION)    
+
+    if (NOT ${HAS_NAME_AND_VERSION})
+        set(CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}/${SERVANT} (${VERSION})" CACHE PATH "default install path" FORCE)
+    endif()
 endif()
 
 if (EXISTS ${CMAKE_INSTALL_PREFIX})
