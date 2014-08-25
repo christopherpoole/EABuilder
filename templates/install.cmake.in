@@ -11,43 +11,69 @@
 #
 #   Chapter 4 -> Installing a Custom Algorithm (page 44-45)
 
+# Build a local cache of import variables
+set(CMAKE_INSTALL_PREFIX @CMAKE_INSTALL_PREFIX)
+set(CMAKE_CURRENT_BINARY_DIR @CMAKE_CURRENT_BINARY_DIR@)
+
+set(SERVANT @SERVANT@)
+
+set(DCF_DIRECTORY @DCF_DIRECTORY@)
+set(EAAPI_BINARIES @EAAPI_BINARIES)
+
+set(REGISTER_SERVANT @REGISTER_SERVANT@)
+set(REGISTER_ALGORITHM @REGISTER_ALGORITHM@)
+set(COPY_CALCULATION_OPTIONS @COPY_CALCULATION_OPTIONS)
+set(FORCE_AGENT_RELOAD @FORCE_AGENT_RELOAD@)
+
 # Install the EAAPI user algorithm.
-file(COPY "@CMAKE_CURRENT_BINARY_DIR@/Release/@SERVANT@.exe" DESTINATION "@CMAKE_INSTALL_PREFIX@")
-foreach (BIN @EAAPI_BINARIES@)
-    file(COPY ${BIN} DESTINATION "@CMAKE_INSTALL_PREFIX@")
+file(COPY "${CMAKE_CURRENT_BINARY_DIR}/Release/${SERVANT}.exe" DESTINATION "${CMAKE_INSTALL_PREFIX}")
+
+set(INSTALLED_EAAPI_BINARIES "")
+foreach (BIN ${EAAPI_BINARIES})
+    file(COPY ${BIN} DESTINATION "${CMAKE_INSTALL_PREFIX}")
+
+    get_filename_component(INSTALLED_EAAPI_BINARY ${BIN} NAME)
+    set(INSTALLED_EAAPI_BINARIES ${INSTALLED_EAAPI_BINARIES} "${CMAKE_INSTALL_PREFIX}/${INSTALLED_EAAPI_BINARY}")
 endforeach(BIN)
 
 # Generate the configuration information for the servant.
-execute_process(COMMAND "@CMAKE_INSTALL_PREFIX@/@SERVANT@.exe" "generate-configuration-info"
-                WORKING_DIRECTORY "@CMAKE_INSTALL_PREFIX@")
+execute_process(COMMAND "${CMAKE_INSTALL_PREFIX}/${SERVANT}.exe" "generate-configuration-info"
+                WORKING_DIRECTORY "${CMAKE_INSTALL_PREFIX}")
 
 # Register the servant.
-if (@REGISTER_SERVANT@ MATCHES "ON")
-    execute_process(COMMAND "@DCF_DIRECTORY@/server/bin/VCConfig.exe" "register-servant VCConfigurationPath='@DCF_DIRECTORY@/server/VCConfiguration.xml' ServantXmlPath='@CMAKE_INSTALL_PREFIX@/ServantInfo.xml'"
-                    WORKING_DIRECTORY "@DCF_DIRECTORY@")
+if (${REGISTER_SERVANT} MATCHES "ON")
+    execute_process(COMMAND "${DCF_DIRECTORY}/server/bin/VCConfig.exe" "register-servant VCConfigurationPath='${DCF_DIRECTORY}/server/VCConfiguration.xml' ServantXmlPath='${CMAKE_INSTALL_PREFIX}/ServantInfo.xml'"
+                    WORKING_DIRECTORY "${DCF_DIRECTORY}")
 endif()
 
 # Register the algorithm.
-if (@REGISTER_ALGORITHM@ MATCHES "ON")
-        execute_process(COMMAND "@DCF_DIRECTORY@/server/bin/InstallAlgoritm.exe" "install '@CMAKE_INSTALL_PREFIX@/AlgorithmInfo.xml' '@DCF_DIRECTORY@/client/InstalledAlgorithms.xml'"
-                    WORKING_DIRECTORY "@DCF_DIRECTORY@")
+if (${REGISTER_ALGORITHM} MATCHES "ON")
+    execute_process(COMMAND "${DCF_DIRECTORY}/server/bin/InstallAlgoritm.exe" "install '${CMAKE_INSTALL_PREFIX}/AlgorithmInfo.xml' '${DCF_DIRECTORY}/client/InstalledAlgorithms.xml'"
+                    WORKING_DIRECTORY "${DCF_DIRECTORY}")
 endif()
 
 # Copy the calculation options.
-if (@COPY_CALCULATION_OPTIONS@ MATCHES "ON")
+if (${COPY_CALCULATION_OPTIONS} MATCHES "ON")
     message("Copying the Calculation Options has not yet been implemented.")
 endif()
 
 # Force DCF agents to reload the configuration.
-if (@FORCE_AGENT_RELOAD@ MATCHES "ON")
+if (${FORCE_AGENT_RELOAD} MATCHES "ON")
     execute_process(COMMAND "curl -X POST http://localhost:57580")
 endif()
 
 # Copy the physical material table files.
-if (@COPY_MATERIAL_TABLE@ MATCHES "ON")
-    file(GLOB MATERIAL_TABLES "@CMAKE_INSTALL_PREFIX@/PhysicalMaterialTableInfo*.xml")
+set(INSTALLED_MATERIAL_TABLES "")
+if (${COPY_MATERIAL_TABLE} MATCHES "ON")
+    file(GLOB MATERIAL_TABLES "${CMAKE_INSTALL_PREFIX}/PhysicalMaterialTableInfo*.xml")
     foreach(MATERIAL_TABLE ${MATERIAL_TABLES})
-        file(COPY ${MATERIAL_TABLE} DESTINATION "@DCF_DIRECTORY@/client/PhysicalMaterialTables")
+        file(COPY ${MATERIAL_TABLE} DESTINATION "${DCF_DIRECTORY}/client/PhysicalMaterialTables")
+
+        get_filename_component(INSTALLED_MATERIAL_TABLE ${MATERIAL_TABLE} NAME)
+        set(INSTALLED_MATERIAL_TABLES ${INSTALLED_MATERIAL_TABLES} "${DCF_DIRECTORY}/client/PhysicalMaterialTables/${INSTALLED_MATERIAL_TABLE}")
     endforeach(MATERIAL_TABLE)
 endif()
+
+# Build a script to uninstall the algorithm.
+configure_file("${CMAKE_CURRENT_BINARY_DIR}/uninstall.cmake.in" uninstall.cmake @ONLY IMMEDIATE)
 
