@@ -77,5 +77,5 @@ if (${COPY_MATERIAL_TABLE} MATCHES "ON")
 endif()
 
 # Build a script to uninstall the algorithm.
-configure_file(EABuilder/templates/uninstall.cmake.in uninstall.cmake @ONLY IMMEDIATE)
+configure_file("@CMAKE_SOURCE_DIR@/EABuilder/templates/uninstall.cmake.in" uninstall.cmake @ONLY IMMEDIATE)
 
