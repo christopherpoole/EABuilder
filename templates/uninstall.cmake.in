@@ -53,7 +53,7 @@ endif()
 # Uninstall the EAAPI user algorithm.
 file(REMOVE "${CMAKE_INSTALL_PREFIX}/${SERVANT}.exe")
 
-foreach (BIN @INSTALLED_EAAPI_BINARIES@)
+foreach (BIN "@INSTALLED_EAAPI_BINARIES@")
     file(REMOVE ${BIN})
 endforeach(BIN)
 
