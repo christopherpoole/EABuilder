@@ -55,7 +55,7 @@ if (${REGISTER_ALGORITHM} MATCHES "ON")
     string(REPLACE "/" "\\" ALG_INFO "${CMAKE_INSTALL_PREFIX}/AlgorithmInfo.xml")
     string(REPLACE "/" "\\" INSTALLED_ALGS "${DCF_DIRECTORY}/client/InstalledAlgorithms.xml")
 
-    execute_process(COMMAND "${DCF_DIRECTORY}/server/bin/InstallAlgoritm.exe" "install" ${ALG_INFO} ${INSTALLED_ALGS}
+    execute_process(COMMAND "${DCF_DIRECTORY}/server/bin/InstallAlgorithm.exe" "install" ${ALG_INFO} ${INSTALLED_ALGS}
                     WORKING_DIRECTORY "${DCF_DIRECTORY}")
 endif()
 
