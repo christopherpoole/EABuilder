@@ -78,3 +78,6 @@ if (${FORCE_AGENT_RELOAD} MATCHES "ON")
     execute_process(COMMAND "curl -X POST http://localhost:57580")
 endif()
 
+# Final clean-up.
+file(REMOVE "${CMAKE_INSTALL_PREFIX}/uninstall.cmake")
+

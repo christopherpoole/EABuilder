@@ -99,4 +99,5 @@ endif()
 
 # Build a script to uninstall the algorithm.
 configure_file("@CMAKE_SOURCE_DIR@/EABuilder/templates/uninstall.cmake.in" uninstall.cmake @ONLY IMMEDIATE)
+file(COPY uninstall.cmake DESTINATION "${CMAKE_INSTALL_PREFIX}")
 
