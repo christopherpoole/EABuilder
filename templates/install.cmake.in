@@ -24,6 +24,7 @@ set(REGISTER_SERVANT @REGISTER_SERVANT@)
 set(REGISTER_ALGORITHM @REGISTER_ALGORITHM@)
 set(COPY_CALCULATION_OPTIONS @COPY_CALCULATION_OPTIONS@)
 set(FORCE_AGENT_RELOAD @FORCE_AGENT_RELOAD@)
+set(COPY_MATERIAL_TABLE @COPY_MATERIAL_TABLE@)
 
 # Install the EAAPI user algorithm.
 file(COPY "${CMAKE_CURRENT_BINARY_DIR}/Release/${SERVANT}.exe" DESTINATION "${CMAKE_INSTALL_PREFIX}")
@@ -68,6 +69,7 @@ if (${COPY_MATERIAL_TABLE} MATCHES "ON")
     file(GLOB MATERIAL_TABLES "${CMAKE_INSTALL_PREFIX}/PhysicalMaterialTableInfo*.xml")
     foreach(MATERIAL_TABLE ${MATERIAL_TABLES})
         file(COPY ${MATERIAL_TABLE} DESTINATION "${DCF_DIRECTORY}/client/PhysicalMaterialTables")
+        file(REMOVE ${MATERIAL_TABLE})
 
         get_filename_component(INSTALLED_MATERIAL_TABLE ${MATERIAL_TABLE} NAME)
         set(INSTALLED_MATERIAL_TABLES ${INSTALLED_MATERIAL_TABLES} "${DCF_DIRECTORY}/client/PhysicalMaterialTables/${INSTALLED_MATERIAL_TABLE}")
@@ -75,5 +77,5 @@ if (${COPY_MATERIAL_TABLE} MATCHES "ON")
 endif()
 
 # Build a script to uninstall the algorithm.
-configure_file("${CMAKE_CURRENT_BINARY_DIR}/uninstall.cmake.in" uninstall.cmake @ONLY IMMEDIATE)
+configure_file(EABuilder/templates/uninstall.cmake.in uninstall.cmake @ONLY IMMEDIATE)
 
