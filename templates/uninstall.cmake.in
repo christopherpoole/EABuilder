@@ -45,7 +45,7 @@ if (${COPY_CALCULATION_OPTIONS} MATCHES "ON")
     file(REMOVE ${OPTIONS_SCHEMA})
 endif()
 
-# Register the servant.
+# De-register the servant.
 if (${REGISTER_SERVANT} MATCHES "ON")
     string(REPLACE "/" "\\" CONFIG_PATH "VCConfigurationPath=${DCF_DIRECTORY}/server/VCConfiguration.xml")
     string(REPLACE "/" "\\" SERVANT_PATH "ServantXmlPath=${CMAKE_INSTALL_PREFIX}/ServantInfo.xml")
@@ -54,7 +54,7 @@ if (${REGISTER_SERVANT} MATCHES "ON")
                     WORKING_DIRECTORY "${DCF_DIRECTORY}")
 endif()
 
-# Register the algorithm.
+# De-register the algorithm.
 if (${REGISTER_ALGORITHM} MATCHES "ON")
     string(REPLACE "/" "\\" ALG_INFO "${CMAKE_INSTALL_PREFIX}/AlgorithmInfo.xml")
     string(REPLACE "/" "\\" INSTALLED_ALGS "${DCF_DIRECTORY}/client/InstalledAlgorithms.xml")
@@ -64,7 +64,7 @@ if (${REGISTER_ALGORITHM} MATCHES "ON")
 endif()
 
 # Uninstall the EAAPI user algorithm.
-file(REMOVE "${CMAKE_INSTALL_PREFIX}/${SERVANT_EXE}.exe")
+file(REMOVE "${CMAKE_INSTALL_PREFIX}/${SERVANT_EXE_NAME}.exe")
 
 foreach (BIN "@INSTALLED_EAAPI_BINARIES@")
     file(REMOVE ${BIN})
