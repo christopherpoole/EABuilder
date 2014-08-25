@@ -22,29 +22,29 @@ execute_process(COMMAND "@CMAKE_INSTALL_PREFIX@/@SERVANT@.exe" "generate-configu
                 WORKING_DIRECTORY "@CMAKE_INSTALL_PREFIX@")
 
 # Register the servant.
-if (@REGISTER_SERVANT@)
+if (@REGISTER_SERVANT@ MATCHES "ON")
     execute_process(COMMAND "@DCF_DIRECTORY@/server/bin/VCConfig.exe" "register-servant VCConfigurationPath='@DCF_DIRECTORY@/server/VCConfiguration.xml' ServantXmlPath='@CMAKE_INSTALL_PREFIX@/ServantInfo.xml'"
                     WORKING_DIRECTORY "@DCF_DIRECTORY@")
 endif()
 
 # Register the algorithm.
-if (@REGISTER_ALGORITHM@)
+if (@REGISTER_ALGORITHM@ MATCHES "ON")
         execute_process(COMMAND "@DCF_DIRECTORY@/server/bin/InstallAlgoritm.exe" "install '@CMAKE_INSTALL_PREFIX@/AlgorithmInfo.xml' '@DCF_DIRECTORY@/client/InstalledAlgorithms.xml'"
                     WORKING_DIRECTORY "@DCF_DIRECTORY@")
 endif()
 
 # Copy the calculation options.
-if (@COPY_CALCULATION_OPTIONS@)
+if (@COPY_CALCULATION_OPTIONS@ MATCHES "ON")
     message("Copying the Calculation Options has not yet been implemented.")
 endif()
 
 # Force DCF agents to reload the configuration.
-if (@FORCE_AGENT_RELOAD@)
+if (@FORCE_AGENT_RELOAD@ MATCHES "ON")
     execute_process(COMMAND "curl -X POST http://localhost:57580")
 endif()
 
 # Copy the physical material table files.
-if (@COPY_MATERIAL_TABLE@)
+if (@COPY_MATERIAL_TABLE@ MATCHES "ON")
     file(GLOB MATERIAL_TABLES "@CMAKE_INSTALL_PREFIX@/PhysicalMaterialTableInfo*.xml")
     foreach(MATERIAL_TABLE ${MATERIAL_TABLES})
         file(COPY ${MATERIAL_TABLE} DESTINATION "@DCF_DIRECTORY@/client/PhysicalMaterialTables")
