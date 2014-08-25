@@ -45,6 +45,9 @@ endif()
 
 # Copy the physical material table files.
 if (@COPY_MATERIAL_TABLE@)
-    message("Copying the Physical Material Table has not yet been implemented.")
+    file(GLOB MATERIAL_TABLES @CMAKE_INSTALL_PREFIX@/PhysicalMaterialTableInfo*.xml)
+    foreach(MATERIAL_TABLE ${MATERIAL_TABLES})
+        file(COPY ${MATERIAL_TABLE} DESTINATION @DCF_DIRECTORY@/client/PhysicalMaterialTables)
+    endforeach(MATERIAL_TABLE)
 endif()
 
