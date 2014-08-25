@@ -64,6 +64,11 @@ Options available with EABuilder are listed below. At a minimum you will probabl
     Default Value: D:/VMSOS/DCF
     Usage: -DDCF_DRECTORY:PATH=<path>
 
+    Variable Name: OPTIONS_DIRECTORY
+    Description: The path to the Distributed Calculation Framework options directory.
+    Default Value: D:/VMSOS/DCF/client/Options ([API])
+    Usage: -DOPTIONS_DRECTORY:PATH=<path>
+
     Variable Name: OVERWRITE
     Description: Overwrite any current installation with the same version.
     Default Value: OFF

@@ -9,6 +9,7 @@
 set(SERVANT "Algorithm" CACHE STRING "The name of the algorithm")
 set(VERSION "0.0.1" CACHE STRING "The version of the algorithm")
 set(DCF_DIRECTORY "D:/VMSOS/DCF" CACHE PATH "The path to the Distributed Calculation Framework installation")
+set(OPTIONS_DIRECTORY "D:/VMSOS/DCF/client/Options ([API])" CACHE PATH "The path to the Distributed Calculation Framework options directory")
 
 option(OVERWRITE "Overwrite any current installation with the same version" OFF)
 option(REGISTER_SERVANT "Register the servant during installation" ON)
@@ -30,7 +31,7 @@ if (EXISTS ${CMAKE_INSTALL_PREFIX})
 endif()
 
 # Append 'Servant' to the algorithm name
-set(SERVANT "${SERVANT}Servant")
+set(SERVANT_EXE_NAME "${SERVANT}Servant")
 
 # Setup the project.
 project(${SERVANT})

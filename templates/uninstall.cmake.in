@@ -16,9 +16,12 @@ set(CMAKE_INSTALL_PREFIX "@CMAKE_INSTALL_PREFIX@")
 set(CMAKE_CURRENT_BINARY_DIR "@CMAKE_CURRENT_BINARY_DIR@")
 
 set(SERVANT "@SERVANT@")
+set(SERVANT_EXE_NAME "@SERVANT_EXE_NAME@")
+set(VERSION "@VERSION@")
 
 set(DCF_DIRECTORY "@DCF_DIRECTORY@")
 set(EAAPI_BINARIES "@EAAPI_BINARIES@")
+set(OPTIONS_DIRECTORY "@OPTIONS_DIRECTORY@")
 
 set(REGISTER_SERVANT @REGISTER_SERVANT@)
 set(REGISTER_ALGORITHM @REGISTER_ALGORITHM@)
@@ -35,7 +38,11 @@ endif()
 
 # Delete the calculation options.
 if (${COPY_CALCULATION_OPTIONS} MATCHES "ON")
-    message("Deleting the Calculation Options has not yet been implemented.")
+    set(OPTIONS_FILE "${OPTIONS_DIRECTORY}/Options_[API]_${SERVANT}_v${VERSION}.xml")
+    file(REMOVE ${OPTIONS_FILE})
+
+    set(OPTIONS_SCHEMA "${OPTIONS_DIRECTORY}/Options_[API]_${SERVANT}_v${VERSION}.xsd")
+    file(REMOVE ${OPTIONS_SCHEMA})
 endif()
 
 # Register the servant.
@@ -56,10 +63,8 @@ if (${REGISTER_ALGORITHM} MATCHES "ON")
                     WORKING_DIRECTORY "${DCF_DIRECTORY}")
 endif()
 
-
-
 # Uninstall the EAAPI user algorithm.
-file(REMOVE "${CMAKE_INSTALL_PREFIX}/${SERVANT}.exe")
+file(REMOVE "${CMAKE_INSTALL_PREFIX}/${SERVANT_EXE}.exe")
 
 foreach (BIN "@INSTALLED_EAAPI_BINARIES@")
     file(REMOVE ${BIN})
