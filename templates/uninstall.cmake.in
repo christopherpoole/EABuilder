@@ -38,17 +38,25 @@ if (${COPY_CALCULATION_OPTIONS} MATCHES "ON")
     message("Deleting the Calculation Options has not yet been implemented.")
 endif()
 
-# De-register the algorithm.
-if (${REGISTER_ALGORITHM} MATCHES "ON")
-    execute_process(COMMAND "${DCF_DIRECTORY}/server/bin/InstallAlgoritm.exe" "uninstall '${CMAKE_INSTALL_PREFIX}/AlgorithmInfo.xml' '${DCF_DIRECTORY}/client/InstalledAlgorithms.xml'"
+# Register the servant.
+if (${REGISTER_SERVANT} MATCHES "ON")
+    string(REPLACE "/" "\\" CONFIG_PATH "VCConfigurationPath=${DCF_DIRECTORY}/server/VCConfiguration.xml")
+    string(REPLACE "/" "\\" SERVANT_PATH "ServantXmlPath=${CMAKE_INSTALL_PREFIX}/ServantInfo.xml")
+
+    execute_process(COMMAND "${DCF_DIRECTORY}/server/bin/VCConfig.exe" "deregister-servant" ${CONFIG_PATH} ${SERVANT_PATH}
                     WORKING_DIRECTORY "${DCF_DIRECTORY}")
 endif()
 
-# De-register the servant.
-if (${REGISTER_SERVANT} MATCHES "ON")
-    execute_process(COMMAND "${DCF_DIRECTORY}/server/bin/VCConfig.exe" "deregister-servant VCConfigurationPath='${DCF_DIRECTORY}/server/VCConfiguration.xml' ServantXmlPath='${CMAKE_INSTALL_PREFIX}/ServantInfo.xml'"
+# Register the algorithm.
+if (${REGISTER_ALGORITHM} MATCHES "ON")
+    string(REPLACE "/" "\\" ALG_INFO "${CMAKE_INSTALL_PREFIX}/AlgorithmInfo.xml")
+    string(REPLACE "/" "\\" INSTALLED_ALGS "${DCF_DIRECTORY}/client/InstalledAlgorithms.xml")
+
+    execute_process(COMMAND "${DCF_DIRECTORY}/server/bin/InstallAlgoritm.exe" "uninstall" ${ALG_INFO} ${INSTALLED_ALGS}
                     WORKING_DIRECTORY "${DCF_DIRECTORY}")
 endif()
+
+
 
 # Uninstall the EAAPI user algorithm.
 file(REMOVE "${CMAKE_INSTALL_PREFIX}/${SERVANT}.exe")
