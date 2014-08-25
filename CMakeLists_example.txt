@@ -19,8 +19,8 @@ include_directories(include)
 file(GLOB sources ${PROJECT_SOURCE_DIR}/src/*.cc)
 file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
 
-add_executable(${SERVANT} main.cc ${sources} ${headers})
-target_link_libraries(${SERVANT} ${EAAPI_LIBRARIES})
+add_executable(${SERVANT_EXE_NAME} main.cc ${sources} ${headers})
+target_link_libraries(${SERVANT_EXE_NAME} ${EAAPI_LIBRARIES})
 
 # Add extra libraries to link against here.
 
