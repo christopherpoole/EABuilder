@@ -38,7 +38,12 @@ This will compile the code only. If you seek to install your algorithm for testi
 
     cmake -P install.cmake
 
+A script for uninstalling the algorithm is also copied to the algorithm install location. You can invoke it at any time like this:
+
+    cmake -P uninstall.cmake 
+
 Any and all dependencies for you project can be specified as indicated in the `CMakeLists.txt` file.
+
 
 ## Options
 Options available with EABuilder are listed below. At a minimum you will probably want to be setting `SERVANT` and `VERSION`. 
