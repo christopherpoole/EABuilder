@@ -25,13 +25,15 @@ Using the example `CMakeLists.txt` file (`CMakeLists_example.txt`), you will wan
 
     +-project/
       +-src/
-      | +-*.cc
+      | +-*.cc (change CMakeLists.txt to look for *.cpp files)
       +-include/
-      | +-*.hh
+      | +-*.hh (change CMakeLists.txt to look for *.hpp files)
       +-build/
       +-EABuilder/
       +-CMakeLists.txt (based on EABuilder/CMakeLists_example.txt)
-      +-main.cc
+      +-main.cc (specify this file name in CMakseLists.txt)
+      +-Options_[API]_<SERVANT>_v<VERSION>.xml (warning if not present)
+      +-Options_[API]_<SERVANT>_v<VERSION>.xsd (warning if not present)
 
 In `build/` start the build process like this:
 
