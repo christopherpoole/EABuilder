@@ -9,7 +9,11 @@ As a preview, EABuilder lets you do things like this:
 
 This will compile your algorithm against the `Debug` EAAPI (you can choose `Release` as well), install your algorithm into the DCF and register it properly, and force a reloading of agents connected to the DCF server.
 
-EABuilder has been tested on a workstation with Varian Eclipse 11.0.31 only. There is no guarantee it will work on your system with the same or other versions.
+### Warnings
+
+ - EABuilder has been tested on a workstation with Varian Eclipse 11.0.31 only. There is no guarantee it will work on your system with the same or other versions.
+ - The `install.cmake` and `uninstall.cmake` scripts are automatically generated from the templates found in `templates/` and information you may or may not provide on the command line. Before running either of them, you will be well advised to inspect them carefully before clobbering your `DCF` install.
+ - Backup `D:/VMSOS` before doing any write operations.
 
 ## Dependences
  - [CMake 2.8](http://www.cmake.org/cmake/resources/software.html) or above.
