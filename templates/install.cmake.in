@@ -81,7 +81,7 @@ endif()
 
 # Force DCF agents to reload the configuration.
 if (${FORCE_AGENT_RELOAD} MATCHES "ON")
-    execute_process(COMMAND "curl -X POST http://localhost:57580")
+    execute_process(COMMAND "curl -X GET http://localhost:57580/InstructAgentsToReloadConfiguration")
 endif()
 
 # Copy the physical material table files.
