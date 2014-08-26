@@ -80,4 +80,5 @@ endif()
 
 # Final clean-up.
 file(REMOVE "${CMAKE_INSTALL_PREFIX}/uninstall.cmake")
+file(REMOVE_RECURSE ${CMAKE_INSTALL_PREFIX})
 
